@@ -1,0 +1,80 @@
+[
+    {
+        "city_name": "Buenos Aires",
+        "id": 80019,
+        "resource_title": {
+            "es": "Plan de readecuación energético",
+            "en": "Power readecution Plan"
+        },
+        "date": "2020, december",
+        "href": "https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/UnidadesTerritoriales/Introduccion",
+        "stats": {
+            "energy": {
+                "title_es": "Adecuación energética",
+                "title_en": "Power adecuation",
+                "value": 25,
+                "unit": "%"
+            },
+            "garbage": {
+                "title_es": "Adecuación basura",
+                "title_en": "Garbage adeqn",
+                "value": 50,
+                "unit": "Tn"
+            }
+        }
+    },
+    {
+        "city_name": "Bogotá",
+        "id": 84278,
+        "resource_title": {
+            "es": "Plan de readecuación energético",
+            "en": "Power readecution Plan"
+        },
+        "date": "2020, december",
+        "href": "https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/UnidadesTerritoriales/Introduccion",
+        "stats": {
+            "energy": {
+                "title_es": "Adecuación energética",
+                "title_en": "Power adecuation",
+                "value": 25,
+                "unit": "%"
+            },
+            "garbage": {
+                "title_es": "Adecuación basura",
+                "title_en": "Garbage adeqn",
+                "value": 50,
+                "unit": "Tn"
+            }
+        }
+    },
+    {
+        "city_name": "Lima",
+        "id": 81941,
+        "resource_title": {
+            "es": "Plan de readecuación energético",
+            "en": "Power readecution Plan"
+        },
+        "date": "2020, december",
+        "href": "https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/UnidadesTerritoriales/Introduccion",
+        "stats": {
+            "energy": {
+                "title_es": "Adecuación energética",
+                "title_en": "Power adecuation",
+                "value": 25,
+                "unit": "%"
+            },
+            "garbage": {
+                "title_es": "Adecuación basura",
+                "title_en": "Garbage adeqn",
+                "value": 70,
+                "unit": "Tn"
+            },
+            "climate": {
+                "title_es": "Adecuación clima",
+                "title_en": "Climate adeqn",
+                "value": 3,
+                "unit": "Year"
+            }
+        }
+    }
+]
