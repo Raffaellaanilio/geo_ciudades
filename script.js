@@ -60,7 +60,7 @@ map.on('load', function () {
             'visibility': 'visible',
         },
         'paint': {
-            'fill-color': '#008000',
+            'fill-color': '#ff6657',
             'fill-opacity': 0.5,
         }
     });
@@ -164,18 +164,18 @@ map.on('load', function () {
                                         boxBody.innerHTML = `
                                                                
                                 <p class="title">Población:
-                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización año 2015)</i></br >
+                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización año 2015)</i></br ></br >
                               
 
                                 <p class="title">Fecha de adhesión a la declaración:</p>
-                                17 de marzo del 2021
-                                </br >
+                                17 de marzo del 2021</br ></br >
+                                
 
-                                <p class="title">Hoja de ruta / Estrategia de Economía Circular:<i class="fa-solid fa-circle-question"></i></p></br >
+                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question"></i></p></br >
 
-                                <p class="title">Sectores objetivos:</p> <i class="fa-solid fa-circle-question"></i></br >
+                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p></br >
 
-                                <button type="button">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
+                                <button type="button" class="btn btn-primary container title">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
 
                                 
                                 ` 

@@ -43,3 +43,11 @@ p {
     padding: 0;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #ff6657;
+}
+
+.question{
+    color: #ff6657;
+}
+
