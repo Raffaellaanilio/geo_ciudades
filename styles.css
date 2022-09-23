@@ -9,7 +9,7 @@ body {
     font-family: 'Fira Sans', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size:x-large;
+    font-size:large;
 }
 
 .title{
@@ -46,4 +46,5 @@ p {
 .question{
     color: #FF6657;
 }
+
 

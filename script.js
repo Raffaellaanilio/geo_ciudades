@@ -1,4 +1,7 @@
 // parsear la url despues del signo de pregunta (parametros) > contexto
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+  });
 
 function getQueryVariableGET(variable) {
     // Estoy asumiendo que query es window.location.search.substring(1);
@@ -198,23 +201,26 @@ map.on('load', function () {
                                         box.style.display = 'block';
                                         console.log(e.features[0])
                                         const city_data = JSON.parse(e.features[0].properties.data)
-                                        boxHeader.innerHTML = `                                    
-                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}
-                                <img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">`
+                                        boxHeader.innerHTML = `<img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">                                    
+                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
 
                                         boxBody.innerHTML = `
                                                                
                                 <p class="title">Población:
-                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización año 2015)</i></br ></br >
+                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización Censo Nacional de Población)</i></br ></br >
                               
                                 <p class="title">Fecha de adhesión a la declaración:</p>
                                 ${city_data.adherence_date}
                                 </br ></br >
                                 
-                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question"></i></p></br >
+                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" title="Hooray!"></i></p>
+                                ${city_data.roadmap_state}
+                                </br ></br >
                       
-                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p></br >
-                           
+                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p>
+                                <h6 style="color:#FF6657">${city_data.target_sectors}</h6>
+                                </br ></br >
+
                                 <button type="button" class="btn btn-primary container title">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
 
                                 
@@ -224,7 +230,7 @@ map.on('load', function () {
 
                                     map.on('mouseleave', 'ciudades', function () {
                                         map.getCanvas().style.cursor = '';
-                                        box.style.display = 'none';
+                                        // box.style.display = 'none';
                                     });
 
                                 });
