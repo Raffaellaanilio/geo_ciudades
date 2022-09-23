@@ -39,11 +39,11 @@ p {
     padding: 0;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #ff6657;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    background-color: #FF6657;
 }
 
 .question{
-    color: #ff6657;
+    color: #FF6657;
 }
 
