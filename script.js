@@ -95,10 +95,10 @@ map.on('load', function () {
                 }).then(function () {
                     let indicator = 4411;
                     let members = '84284,' + membersId;
-                    let url2 = "https://api-cepalstat.cepal.org/cepalstat/api/v1/indicator/" + indicator + "/data?members=" + members + "&lang=" + lang + "&format=json&app=geo-cepalstat";
+                    let apiCepalstat = "https://api-cepalstat.cepal.org/cepalstat/api/v1/indicator/" + indicator + "/data?members=" + members + "&lang=" + lang + "&format=json&app=geo-cepalstat";
 
-                    console.log(url2)
-                    fetch(url2)
+                    console.log(apiCepalstat)
+                    fetch(apiCepalstat)
                         .then((resp) => resp.json())
                         .then(function (statdata) {
                             statistics = statdata.body.data;
@@ -151,7 +151,6 @@ map.on('load', function () {
                                     //DIV on hover
 
                                     map.on('mouseenter', 'ciudades', function (e) {
-
                                         const box = document.getElementById('box');
                                         const boxHeader = document.getElementById('boxHeader');
                                         const boxBody = document.getElementById('boxBody');
@@ -166,15 +165,14 @@ map.on('load', function () {
                                 <p class="title">Población:
                                 ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización año 2015)</i></br ></br >
                               
-
                                 <p class="title">Fecha de adhesión a la declaración:</p>
-                                17 de marzo del 2021</br ></br >
+                                ${e.features[0].properties.data.adherence_date}
+                                </br ></br >
                                 
-
                                 <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question"></i></p></br >
-
+                      
                                 <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p></br >
-
+                           
                                 <button type="button" class="btn btn-primary container title">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
 
                                 
