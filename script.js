@@ -201,16 +201,11 @@ map.on('load', function () {
                                         box.style.display = 'block';
 
                                         const city_data = JSON.parse(e.features[0].properties.data)
-<<<<<<< HEAD
-                                        boxHeader.innerHTML = `<img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">                                    
-                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
-=======
                                         console.log(city_data.target_sectors)
                                         const target_sectors = city_data.target_sectors.replace(/',/g, "';").split(';')
                                         boxHeader.innerHTML = `                                    
                                 ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}
                                 <img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">`
->>>>>>> 323a713342b2f9d6a1592ffd02fcc23fac3313a9
 
                                         boxBody.innerHTML = `
                                                                
@@ -225,16 +220,9 @@ map.on('load', function () {
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
-<<<<<<< HEAD
-                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p>
-                                <h6 style="color:#FF6657">${city_data.target_sectors}</h6>
-                                </br ></br >
-
-=======
                                 <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p><ul id="target_sectors"></ul>
                                 </br >
                            
->>>>>>> 323a713342b2f9d6a1592ffd02fcc23fac3313a9
                                 <button type="button" class="btn btn-primary container title">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
 
                                 
