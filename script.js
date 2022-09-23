@@ -77,7 +77,7 @@ map.on('load', function () {
                         });
                         if (typeof (cityData) == 'object') {
                             geodata.features[i].properties.data = cityData;
-                            membersId.push(cityData.id)                
+                            membersId.push(cityData.id)
                         } else {
                             geodata.features[i].properties.data = ''
                         }
@@ -110,21 +110,21 @@ map.on('load', function () {
                                     geodata.features[i].properties.population = -88888888
                                 }
                             });
-                            const findCountry = (city,currentParent) => {
+                            const findCountry = (city, currentParent) => {
                                 var parent = dimension.members.find(object => {
                                     return object.id == currentParent;
                                 });
                                 if (parent.parent == 79515) {
                                     var country_parent = countries.features.find(object => {
                                         return object.properties.depualc == currentParent;
-                                    });  
-                                    country_parent.properties.in = 1     
+                                    });
+                                    country_parent.properties.in = 1
                                     var city_founded = geodata.features.find(object => {
                                         return object.properties.id == city;
-                                    });  
-                                    city_founded.properties.country_id = currentParent      
-                                    city_founded.properties.country_name = country_parent.properties.name_es      
-                                    city_founded.properties.country_code = country_parent.properties.ISO_A3                    
+                                    });
+                                    city_founded.properties.country_id = currentParent
+                                    city_founded.properties.country_name = country_parent.properties.name_es
+                                    city_founded.properties.country_code = country_parent.properties.ISO_A3
                                 } else {
                                     cities[city] = parent.parent
                                     findCountry(city, parent.parent)
@@ -133,14 +133,14 @@ map.on('load', function () {
                             $.each(cities_id, function (i, city) {
                                 findCountry(city, city)
                             })
-                            
-                            
+
+
                         }).then(function () {
                             map.addSource('countries', {
-                                type:'geojson',
-                                data:countries
+                                type: 'geojson',
+                                data: countries
                             });
-                        
+
                             map.addLayer({
                                 'id': 'countries',
                                 'type': 'fill',
@@ -199,10 +199,18 @@ map.on('load', function () {
 
                                         map.getCanvas().style.cursor = 'pointer';
                                         box.style.display = 'block';
-                                        console.log(e.features[0])
+
                                         const city_data = JSON.parse(e.features[0].properties.data)
+<<<<<<< HEAD
                                         boxHeader.innerHTML = `<img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">                                    
                                 ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
+=======
+                                        console.log(city_data.target_sectors)
+                                        const target_sectors = city_data.target_sectors.replace(/',/g, "';").split(';')
+                                        boxHeader.innerHTML = `                                    
+                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}
+                                <img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">`
+>>>>>>> 323a713342b2f9d6a1592ffd02fcc23fac3313a9
 
                                         boxBody.innerHTML = `
                                                                
@@ -217,15 +225,23 @@ map.on('load', function () {
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
+<<<<<<< HEAD
                                 <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p>
                                 <h6 style="color:#FF6657">${city_data.target_sectors}</h6>
                                 </br ></br >
 
+=======
+                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p><ul id="target_sectors"></ul>
+                                </br >
+                           
+>>>>>>> 323a713342b2f9d6a1592ffd02fcc23fac3313a9
                                 <button type="button" class="btn btn-primary container title">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
 
                                 
-                                ` 
-
+                                `
+                                        target_sectors.map((sector) => {
+                                            $("#target_sectors").append(`<li>${sector.replace("'","").replace("'","")}</li>`)
+                                        })
                                     })
 
                                     map.on('mouseleave', 'ciudades', function () {
