@@ -47,23 +47,10 @@ var map = new mapboxgl.Map({
 
 map.on('load', function () {
 
-    map.addSource('countries', {
-        type:'geojson',
-        data:countries
-    });
+    $.each(countries.features, function (i, country) {
+        country.properties.in = 0
+    })
 
-    map.addLayer({
-        'id': 'countries',
-        'type': 'fill',
-        'source': 'countries',
-        'layout': {
-            'visibility': 'visible',
-        },
-        'paint': {
-            'fill-color': '#ff6657',
-            'fill-opacity': 0.5,
-        }
-    });
 
     let geonodeName = "geonode:cities_depualc"
     let geodata = ''
@@ -87,7 +74,7 @@ map.on('load', function () {
                         });
                         if (typeof (cityData) == 'object') {
                             geodata.features[i].properties.data = cityData;
-                            membersId.push(cityData.id)
+                            membersId.push(cityData.id)                
                         } else {
                             geodata.features[i].properties.data = ''
                         }
@@ -101,19 +88,69 @@ map.on('load', function () {
                     fetch(apiCepalstat)
                         .then((resp) => resp.json())
                         .then(function (statdata) {
-                            statistics = statdata.body.data;
+                            var statistics = statdata.body.data;
+                            var dimension = statdata.body.dimensions.find(object => {
+                                return object.id == 79515;
+                            });
+                            let cities_id = []
+                            let cities = {}
+                            console.log(dimension)
                             $.each(geodata.features, function (i, geounit) {
                                 let statistic = statistics.find(object => {
                                     return object.dim_79515 == geounit.properties.id;
                                 });
                                 if (typeof (statistic) == 'object') {
                                     geodata.features[i].properties.population = Number(statistic.value);
+                                    cities[geodata.features[i].properties.id] = 0
+                                    cities_id.push(geodata.features[i].properties.id)
                                 } else {
                                     geodata.features[i].properties.population = -88888888
                                 }
                             });
-                            console.log(geodata)
+                            const findCountry = (city,currentParent) => {
+                                var parent = dimension.members.find(object => {
+                                    return object.id == currentParent;
+                                });
+                                if (parent.parent == 79515) {
+                                    var country_parent = countries.features.find(object => {
+                                        return object.properties.depualc == currentParent;
+                                    });  
+                                    country_parent.properties.in = 1     
+                                    var city_founded = geodata.features.find(object => {
+                                        return object.properties.id == city;
+                                    });  
+                                    city_founded.properties.country_id = currentParent      
+                                    city_founded.properties.country_name = country_parent.properties.name_es      
+                                    city_founded.properties.country_code = country_parent.properties.ISO_A3                    
+                                } else {
+                                    cities[city] = parent.parent
+                                    findCountry(city, parent.parent)
+                                }
+                            }
+                            $.each(cities_id, function (i, city) {
+                                findCountry(city, city)
+                            })
+                            
+                            
                         }).then(function () {
+                            map.addSource('countries', {
+                                type:'geojson',
+                                data:countries
+                            });
+                        
+                            map.addLayer({
+                                'id': 'countries',
+                                'type': 'fill',
+                                'source': 'countries',
+                                'layout': {
+                                    'visibility': 'visible',
+                                },
+                                //'filter': ['==', ["get", "in"], 1],
+                                'paint': {
+                                    'fill-color': ['match', ['get', 'in'], 1, '#ff6657', '#333333'],
+                                    'fill-opacity': 0.5,
+                                }
+                            });
                             let image_url = "./images/location_icon.png"
                             map.loadImage(
                                 image_url,
@@ -148,6 +185,8 @@ map.on('load', function () {
                                     });
 
 
+
+
                                     //DIV on hover
 
                                     map.on('mouseenter', 'ciudades', function (e) {
@@ -157,8 +196,11 @@ map.on('load', function () {
 
                                         map.getCanvas().style.cursor = 'pointer';
                                         box.style.display = 'block';
+                                        console.log(e.features[0])
+                                        const city_data = JSON.parse(e.features[0].properties.data)
                                         boxHeader.innerHTML = `                                    
-                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
+                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}
+                                <img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">`
 
                                         boxBody.innerHTML = `
                                                                
@@ -166,7 +208,7 @@ map.on('load', function () {
                                 ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización año 2015)</i></br ></br >
                               
                                 <p class="title">Fecha de adhesión a la declaración:</p>
-                                ${e.features[0].properties.data.adherence_date}
+                                ${city_data.adherence_date}
                                 </br ></br >
                                 
                                 <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question"></i></p></br >
@@ -193,4 +235,6 @@ map.on('load', function () {
 
 
         })
+
+
 });
