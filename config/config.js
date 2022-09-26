@@ -6,7 +6,7 @@ var main_items = {
     "map": {
         "center": [-100.02, -9.97], // X and Y
         "zoom": 4,
-        "style": "mapbox://styles/mapbox/light-v10",
+        "style": "mapbox://styles/mapbox/streets-v11",
         "region_box": [[-97, -57], [-58, 34]],
     }
 }
