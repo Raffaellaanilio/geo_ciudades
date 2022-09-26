@@ -32,7 +32,7 @@ body {
     font-size:small;
     display: grid;
     grid-template-columns: auto auto auto;
-    position: absolute;
+    position:relative;
     border-color: #FF6657 !important;
     border-width: thick !important;
     width: 20rem;
@@ -43,6 +43,18 @@ body {
     right: 0;
     float: right;
     box-shadow: 1%;
+}
+
+#info {
+    position: absolute;
+    font-size:small;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    left:0;
+    bottom:0;
+    padding: 1%;
+    width: 100%;
+    text-align: left;
 }
 
 @media only screen and (max-width: 50%) {
@@ -66,7 +78,7 @@ p {
     box-shadow: none
 }
 
-.question{
+.question, .location{
     color: #FF6657;
 }
 
@@ -74,6 +86,9 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.sectores {
     color:#FF6657
 }
 
