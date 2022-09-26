@@ -233,8 +233,9 @@ map.on('load', function () {
                                         'source': 'ciudades',
                                         'layout': {
                                             'icon-image': 'location_icon',
-                                            'icon-size': 1,
-                                            'visibility': 'visible'
+                                            'icon-size': 0.5,
+                                            'visibility': 'visible',
+                                            'icon-allow-overlap': true,
                                         },
                                         'filter': ['!=', ["get", "data"], ''],
                                         'paint': {
