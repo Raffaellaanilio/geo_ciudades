@@ -9,7 +9,7 @@ body {
     font-family: 'Fira Sans', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size:large;
+    font-size:medium !important;
 }
 
 .title{
@@ -29,6 +29,7 @@ body {
 }
 
 #box {
+    font-size:small;
     display: grid;
     grid-template-columns: auto auto auto;
     position: absolute;
@@ -43,7 +44,7 @@ body {
     box-shadow: 1%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
     .mainItems {
       grid-template-columns: auto;
     }
@@ -58,6 +59,10 @@ p {
     background-color: #FF6657;
     border-color:#FF6657;
     color: white
+}
+
+.btn-primary:active{
+    box-shadow: none
 }
 
 .question{
