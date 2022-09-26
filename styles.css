@@ -29,6 +29,9 @@ body {
 }
 
 #box {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    position: absolute;
     border-color: #FF6657 !important;
     border-width: thick !important;
     width: 26rem;
@@ -39,6 +42,12 @@ body {
     float: right;
     box-shadow: 1%;
 }
+
+@media only screen and (max-width: 600px) {
+    .mainItems {
+      grid-template-columns: auto;
+    }
+  }
 
 p {
     margin: 0;

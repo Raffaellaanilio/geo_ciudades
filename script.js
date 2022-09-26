@@ -144,12 +144,6 @@ map.on('load', function () {
 
 
                         }).then(function () {
-                           
-                            map.addSource('countries', {
-                                type: 'geojson',
-                                data: countries
-                            });
-
                             map.addSource('countries_labels', {
                                 type: 'geojson',
                                 data: countries_labels
@@ -160,9 +154,11 @@ map.on('load', function () {
                                 data: countries
                             });
 
-
-                           
-
+                            map.addSource('countries', {
+                                type: 'geojson',
+                                data: countries
+                            });
+        
                             map.addLayer({
                                 'id': "boundaries",
                                 'type': 'line',
@@ -246,11 +242,7 @@ map.on('load', function () {
                                         }
                                     });
 
-
-
-
                                     //DIV on hover
-
                                     map.on('mouseenter', 'ciudades', function (e) {
                                         const box = document.getElementById('box');
                                         const boxHeader = document.getElementById('boxHeader');
@@ -267,7 +259,7 @@ map.on('load', function () {
 
                                         boxBody.innerHTML = `      
                                 <p class="title">Población:
-                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(Año ${year})</i></br ></br >
+                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización: año ${year})</i></br ></br >
                               
                                 <p class="title">Fecha de adhesión a la declaración:</p>
                                 ${city_data.adherence_date}

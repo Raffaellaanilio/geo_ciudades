@@ -4,10 +4,10 @@ var main_items = {
     "description": ["Información de la iniciativa...", "Information regarding the iniciative..."],
     "main_language": "english",
     "map": {
-        "center": [-100.02, -9.97], // X and Y
+        "center": [-100, -9], // X and Y
         "zoom": 4,
         "style": "mapbox://styles/mapbox/streets-v11",
-        "region_box": [[-97, -57], [-58, 34]],
+        "region_box": [[-27, -57], [-58, 34]],
     }
 }
 
