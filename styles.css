@@ -29,7 +29,8 @@ body {
 }
 
 #box {
-    border-top: #FF6657;
+    border-color: #FF6657 !important;
+    border-width: thick !important;
     width: 26rem;
     padding: 0px;
     margin: 1%;

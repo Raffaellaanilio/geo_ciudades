@@ -1,8 +1,4 @@
 // parsear la url despues del signo de pregunta (parametros) > contexto
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
 function getQueryVariableGET(variable) {
     // Estoy asumiendo que query es window.location.search.substring(1);
     var query = window.location.search.substring(1);
@@ -15,6 +11,11 @@ function getQueryVariableGET(variable) {
     }
     return false;
 };
+
+//tooltip
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
 
 var lang = getQueryVariableGET('lang');
@@ -141,7 +142,7 @@ map.on('load', function () {
                                 type: 'geojson',
                                 data: countries
                             });
-                            
+
                             map.addSource('countries_labels', {
                                 type: 'geojson',
                                 data: countries_labels
@@ -259,17 +260,17 @@ map.on('load', function () {
 
                                         boxBody.innerHTML = `      
                                 <p class="title">Población:
-                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización Censo Nacional de Población)</i></br ></br >
+                                ${e.features[0].properties.population}</p>Millones de habitantes <i><small>(última actualización Censo Nacional de Población)</small></i></br ></br >
                               
                                 <p class="title">Fecha de adhesión a la declaración:</p>
                                 ${city_data.adherence_date}
                                 </br ></br >
                                 
-                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" title="Hooray!"></i></p>
+                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" data-placement="top" title="Hooray!"></i></p>
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
-                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p><ul id="target_sectors"></ul>
+                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></p><ul id="target_sectors"></ul>
                                 </br >
                            
                                 <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button>`
