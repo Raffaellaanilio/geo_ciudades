@@ -60,6 +60,7 @@ map.on('load', function () {
     let urlGeonode = 'https://geoportal.cepal.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=' + geonodeName + '&outputFormat=json&srs=EPSG%3A4326&srsName=EPSG%3A4326';
     let urlJsonCiudades = 'http://plataformaurbanapro-q.cepal.org/es/ext/mapdata/circularcities.json'
     let membersId = []
+    let year = ''
 
     fetch(urlGeonode)
         .then((resp) => resp.json())
@@ -95,9 +96,15 @@ map.on('load', function () {
                             var dimension = statdata.body.dimensions.find(object => {
                                 return object.id == 79515;
                             });
+                            var year_dimension = statdata.body.dimensions.find(object => {
+                                return object.id == 29117;
+                            });
+                            year_record = year_dimension.members.find(object => {
+                                return object.in == 1;
+                            });
+                            year = year_record.name
                             let cities_id = []
                             let cities = {}
-                            console.log(dimension)
                             $.each(geodata.features, function (i, geounit) {
                                 let statistic = statistics.find(object => {
                                     return object.dim_79515 == geounit.properties.id;
@@ -259,7 +266,7 @@ map.on('load', function () {
 
                                         boxBody.innerHTML = `      
                                 <p class="title">Población:
-                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización Censo Nacional de Población)</i></br ></br >
+                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(Año ${year})</i></br ></br >
                               
                                 <p class="title">Fecha de adhesión a la declaración:</p>
                                 ${city_data.adherence_date}
