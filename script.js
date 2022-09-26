@@ -1,7 +1,7 @@
 // parsear la url despues del signo de pregunta (parametros) > contexto
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-  });
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 function getQueryVariableGET(variable) {
     // Estoy asumiendo que query es window.location.search.substring(1);
@@ -30,7 +30,7 @@ if (lang == "es") {
     }
 }
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaGNhc3RlbGxhcm8iLCJhIjoiY2lrazJvZHFrMDl1eXYwa202Z2Njczk1eiJ9.fIBpy-XcIN0kKSuIx6oReA';
+maplibregl.accessToken = 'pk.eyJ1IjoiaGNhc3RlbGxhcm8iLCJhIjoiY2lrazJvZHFrMDl1eXYwa202Z2Njczk1eiJ9.fIBpy-XcIN0kKSuIx6oReA';
 
 var title = main_items.title[language];
 var map_style = main_items.map.style;
@@ -41,10 +41,10 @@ var lang = main_items.main_language;
 var acerca_de = main_items.acerca_de[language];
 var description = main_items.description[language];
 
-var map = new mapboxgl.Map({
+var map = new maplibregl.Map({
     container: 'map', // container id
     style: map_style, // stylesheet location
-    bounds: new mapboxgl.LngLatBounds(region_box),
+    bounds: new maplibregl.LngLatBounds(region_box),
 });
 
 
@@ -136,9 +136,57 @@ map.on('load', function () {
 
 
                         }).then(function () {
+                           
                             map.addSource('countries', {
                                 type: 'geojson',
                                 data: countries
+                            });
+                            
+                            map.addSource('countries_labels', {
+                                type: 'geojson',
+                                data: countries_labels
+                            });
+
+                            map.addSource('boundaries', {
+                                type: 'geojson',
+                                data: countries
+                            });
+
+
+                           
+
+                            map.addLayer({
+                                'id': "boundaries",
+                                'type': 'line',
+                                'source': 'boundaries',
+                                'layout': {
+                                    'line-join': 'round',
+                                    'line-cap': 'round',
+                                   // 'symbol-z-order':'source'
+                                },
+                                'paint': {
+                                    'line-color': '#FFFFFF',
+                                    'line-width': 3
+                                }
+                            });
+
+                            map.addLayer({
+                                'id': "countries_labels",
+                                'type': 'symbol',
+                                'source': 'countries_labels',
+                                'layout': {
+                                    'visibility': 'visible',
+                                    'text-field': ['get', 'name_es'],
+                                    'text-size': 12,
+                                    'text-font': ['Arial Unicode MS Regular'],
+                                    // 'symbol-z-order':'source'
+                                },
+                                'paint': {
+                                    'text-color': 'black',
+                                    'text-opacity': 1,
+                                    'text-halo-color': 'white',
+                                    'text-halo-width': 2,
+                                }
                             });
 
                             map.addLayer({
@@ -147,13 +195,15 @@ map.on('load', function () {
                                 'source': 'countries',
                                 'layout': {
                                     'visibility': 'visible',
+                                   // 'symbol-z-order':'source'
                                 },
                                 //'filter': ['==', ["get", "in"], 1],
                                 'paint': {
-                                    'fill-color': ['match', ['get', 'in'], 1, '#ff6657', '#333333'],
-                                    'fill-opacity': 0.5,
+                                    'fill-color': ['match', ['get', 'in'], 1, '#ff6657', '#E2C0C9'],
+                                    'fill-opacity': 0.8,
                                 }
                             });
+
                             let image_url = "./images/location_icon.png"
                             map.loadImage(
                                 image_url,
@@ -164,6 +214,7 @@ map.on('load', function () {
                                     map.addImage('location_icon', image, {
                                         'sdf': true
                                     });
+
 
                                     // Add a data source containing one point feature.
                                     map.addSource("ciudades", {
@@ -203,12 +254,10 @@ map.on('load', function () {
                                         const city_data = JSON.parse(e.features[0].properties.data)
                                         console.log(city_data.target_sectors)
                                         const target_sectors = city_data.target_sectors.replace(/',/g, "';").split(';')
-                                        boxHeader.innerHTML = `                                    
-                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}
-                                <img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">`
+                                        boxHeader.innerHTML = `<img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">                              
+                                ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
 
-                                        boxBody.innerHTML = `
-                                                               
+                                        boxBody.innerHTML = `      
                                 <p class="title">Población:
                                 ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización Censo Nacional de Población)</i></br ></br >
                               
@@ -223,12 +272,11 @@ map.on('load', function () {
                                 <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question"></i></p><ul id="target_sectors"></ul>
                                 </br >
                            
-                                <button type="button" class="btn btn-primary container title">Ver todos los datos <i class="fa-solid fa-chevron-right"></i></button>
+                                <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button>`
 
-                                
-                                `
                                         target_sectors.map((sector) => {
-                                            $("#target_sectors").append(`<li>${sector.replace("'","").replace("'","")}</li>`)
+                                            $("#target_sectors").append
+                                                (`<li>${sector.replace("'", "").replace("'", "")}</li>`)
                                         })
                                     })
 

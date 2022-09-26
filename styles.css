@@ -29,9 +29,14 @@ body {
 }
 
 #box {
+    border-top: #FF6657;
     width: 26rem;
     padding: 0px;
-    display: flex;
+    margin: 1%;
+    bottom: 0;
+    right: 0;
+    float: right;
+    box-shadow: 1%;
 }
 
 p {
@@ -39,12 +44,25 @@ p {
     padding: 0;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus, .btn-outline-primary {
     background-color: #FF6657;
+    border-color:#FF6657;
+    color: white
 }
 
 .question{
     color: #FF6657;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color:#FF6657
+}
 
+.enlace, .enlace:hover, .enlace:active {
+    color: white;
+    text-decoration: none;
+    color: white;
+}
