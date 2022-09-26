@@ -15,7 +15,7 @@ function getQueryVariableGET(variable) {
 //tooltip
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-  })
+})
 
 
 var lang = getQueryVariableGET('lang');
@@ -158,7 +158,24 @@ map.on('load', function () {
                                 type: 'geojson',
                                 data: countries
                             });
-        
+
+                            map.addLayer({
+                                'id': 'countries',
+                                'type': 'fill',
+                                'source': 'countries',
+                                'layout': {
+                                    'visibility': 'visible',
+                                    // 'symbol-z-order':'source'
+                                },
+                                //'filter': ['==', ["get", "in"], 1],
+                                'paint': {
+                                    'fill-color': ['match', ['get', 'in'], 1, '#ff6657', '#E2C0C9'],
+                                    'fill-opacity': 1,
+                                }
+                            });
+
+                           
+
                             map.addLayer({
                                 'id': "boundaries",
                                 'type': 'line',
@@ -166,11 +183,11 @@ map.on('load', function () {
                                 'layout': {
                                     'line-join': 'round',
                                     'line-cap': 'round',
-                                   // 'symbol-z-order':'source'
+                                    // 'symbol-z-order':'source'
                                 },
                                 'paint': {
                                     'line-color': '#FFFFFF',
-                                    'line-width': 3
+                                    'line-width': 1
                                 }
                             });
 
@@ -190,21 +207,6 @@ map.on('load', function () {
                                     'text-opacity': 1,
                                     'text-halo-color': 'white',
                                     'text-halo-width': 2,
-                                }
-                            });
-
-                            map.addLayer({
-                                'id': 'countries',
-                                'type': 'fill',
-                                'source': 'countries',
-                                'layout': {
-                                    'visibility': 'visible',
-                                   // 'symbol-z-order':'source'
-                                },
-                                //'filter': ['==', ["get", "in"], 1],
-                                'paint': {
-                                    'fill-color': ['match', ['get', 'in'], 1, '#ff6657', '#E2C0C9'],
-                                    'fill-opacity': 0.8,
                                 }
                             });
 
