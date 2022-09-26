@@ -43,6 +43,7 @@ body {
     right: 0;
     float: right;
     box-shadow: 1%;
+    z-index: 2;
 }
 
 #info {
@@ -55,6 +56,7 @@ body {
     padding: 1%;
     width: 100%;
     text-align: left;
+    z-index: 1;
 }
 
 @media only screen and (max-width: 50%) {
