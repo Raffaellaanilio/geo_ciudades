@@ -52,12 +52,23 @@ var map = new maplibregl.Map({
 map.on('load', function () {
 
     const boxInfo = document.getElementById('info');
+    const boxHeader = document.getElementById('boxHeader');
+    const boxBody = document.getElementById('boxBody');
+
+
     boxInfo.innerHTML = `
     <ul>
     <li>Las zonas pintadas en el mapa corresponden a los países que se hayan adherido.</br ></li>
     <li><i class="fa-sharp fa-solid fa-location-dot location"></i> Corresponden a las ciudades que se han adherido.</li>
     </ul>
-    `     
+    `
+
+
+    const mensajeBienvenida = document.getElementById('mensajeBienvenida');
+    boxHeader.innerHTML = `Mapa Ciudades`
+    boxBody.innerHTML = `Por favor, seleccione una ciudad para ver su informacion`
+
+
 
     $.each(countries.features, function (i, country) {
         country.properties.in = 0
@@ -277,7 +288,7 @@ map.on('load', function () {
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
-                                <p class="title sectores">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></p><ul id="target_sectors"></ul>
+                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></p><ul id="target_sectors"></ul>
                                 </br >
                            
                                 <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button>`
