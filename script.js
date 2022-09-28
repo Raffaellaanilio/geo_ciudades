@@ -12,24 +12,26 @@ function getQueryVariableGET(variable) {
     return false;
 };
 
-//tooltip
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
-
-
 var lang = getQueryVariableGET('lang');
 if (lang == "es") {
     var language = 0;
 } else if (lang == "en") {
     var language = 1;
 } else {
-    if (main_items.main_language == "english") {
-        var language = 1;
-    } else if (main_items.main_language == "spanish") {
-        var language = 0;
-    }
+    var language = 0;
+    lang = "es"
+}
+
+language = function language() {
+    if (lang == 'en') {
+        lang_number = 1;
+        $(".en").css("display", "block");
+        $(".es").css("display", "none");
+    } else {
+        lang_number = 0;
+        $(".es").css("display", "block");
+        $(".en").css("display", "none");
+    };
 }
 
 maplibregl.accessToken = 'pk.eyJ1IjoiaGNhc3RlbGxhcm8iLCJhIjoiY2lrazJvZHFrMDl1eXYwa202Z2Njczk1eiJ9.fIBpy-XcIN0kKSuIx6oReA';
@@ -39,7 +41,6 @@ var map_style = main_items.map.style;
 var map_center = main_items.map.center;
 var map_zoom = main_items.map.zoom;
 var region_box = main_items.map.region_box;
-var lang = main_items.main_language;
 var acerca_de = main_items.acerca_de[language];
 var description = main_items.description[language];
 
@@ -59,8 +60,14 @@ map.on('load', function () {
 
     boxInfo.innerHTML = `
     <ul>
-    <li>Las zonas pintadas en el mapa corresponden a los países que se hayan adherido.</br ></li>
-    <li><i class="fa-sharp fa-solid fa-location-dot location"></i> Corresponden a las ciudades que se han adherido.</li>
+    <li>
+    <span class="es">Las zonas pintadas en el mapa corresponden a los países que se hayan adherido.</br ></span>
+    <span class="en">The areas painted on the map correspond to the countries that have joined.</span>
+    </li>
+    <li>
+    <span class="es"><i class="fa-sharp fa-solid fa-location-dot location"></i> Corresponden a las ciudades que se han adherido.</br ></span>
+    <span class="en"><i class="fa-sharp fa-solid fa-location-dot location"></i> Correspond to the cities that have adhered</span>
+    </li>
     </ul>
     `
 
@@ -262,6 +269,7 @@ map.on('load', function () {
 
                                     //DIV on hover
                                     map.on('mouseenter', 'ciudades', function (e) {
+
                                         const box = document.getElementById('box');
                                         const boxHeader = document.getElementById('boxHeader');
                                         const boxBody = document.getElementById('boxBody');
@@ -283,11 +291,13 @@ map.on('load', function () {
                                 ${city_data.adherence_date}
                                 </br ></br >
                                 
-                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Hooray!"></i></p>
+                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></p>
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
-                                <p id="question1" class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="top" title="Hooray!"></i></p><ul id="target_sectors"></ul>
+                                <p id="question1" class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></p><ul id="target_sectors"></ul>
                                 </br >
                            
                                 <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button>`
@@ -296,12 +306,19 @@ map.on('load', function () {
                                             $("#target_sectors").append
                                                 (`<li>${sector.replace("'", "").replace("'", "")}</li>`)
                                         })
+                                        //tooltip
+                                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                                        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                            return new bootstrap.Tooltip(tooltipTriggerEl)
+                                        })
                                     })
 
                                     map.on('mouseleave', 'ciudades', function () {
                                         map.getCanvas().style.cursor = '';
                                         // box.style.display = 'none';
                                     });
+
+
 
                                 });
                         })
@@ -313,4 +330,7 @@ map.on('load', function () {
         })
 
 
-});
+console.log(lang)
+language()
+}
+);
