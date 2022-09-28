@@ -33,7 +33,6 @@ body {
     display: grid;
     grid-template-columns: auto auto auto;
     position:relative;
-    border-color: #FF6657 !important;
     border-width: thick !important;
     width: 20rem;
     max-width: 50%;
@@ -72,9 +71,13 @@ p {
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus, .btn-outline-primary {
     background-color: #FF6657;
-    border-color:#FF6657;
+    border-color:#FF6657 !important;
     color: white
 }
+
+  .border-primary:nth-child(2) {
+    border-color: #FF6657 !important;
+  }
 
 .btn-primary:active{
     box-shadow: none

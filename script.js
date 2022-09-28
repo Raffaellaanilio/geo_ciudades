@@ -13,8 +13,9 @@ function getQueryVariableGET(variable) {
 };
 
 //tooltip
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
 
@@ -63,8 +64,6 @@ map.on('load', function () {
     </ul>
     `
 
-
-    const mensajeBienvenida = document.getElementById('mensajeBienvenida');
     boxHeader.innerHTML = `Mapa Ciudades`
     boxBody.innerHTML = `Por favor, seleccione una ciudad para ver su informacion`
 
@@ -284,11 +283,11 @@ map.on('load', function () {
                                 ${city_data.adherence_date}
                                 </br ></br >
                                 
-                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" data-placement="top" title="Hooray!"></i></p>
+                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Hooray!"></i></p>
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
-                                <p class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></p><ul id="target_sectors"></ul>
+                                <p id="question1" class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="top" title="Hooray!"></i></p><ul id="target_sectors"></ul>
                                 </br >
                            
                                 <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button>`
