@@ -322,11 +322,9 @@ map.on('load', function () {
                            
                                 <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">
                                 
-                                <span class="es">Ver todos los datos</span>
-                                <span class="en">See all data</span>
-                              
-                                
-                                <i class="fa-solid fa-chevron-right"></a></i></button>`
+                                <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button></span>
+                                <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></button></span>
+                              `
 
                                         target_sectors.map((sector) => {
                                             $("#target_sectors").append
