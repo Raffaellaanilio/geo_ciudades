@@ -71,8 +71,8 @@ map.on('load', function () {
     </ul>
     `
 
-    boxHeader.innerHTML = `Mapa Ciudades`
-    boxBody.innerHTML = `Por favor, seleccione una ciudad para ver su informacion`
+    boxHeader.innerHTML = `<span class="es">Mapa Ciudades</span><span class="en">City map</span>`
+    boxBody.innerHTML = `<span class="es">Por favor, seleccione una ciudad para ver su informacion</span><span class="en">Please select a city to see its information</span>`
 
 
 
@@ -83,7 +83,7 @@ map.on('load', function () {
     let geonodeName = "geonode:cities_depualc"
     let geodata = ''
     let urlGeonode = 'https://geoportal.cepal.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=' + geonodeName + '&outputFormat=json&srs=EPSG%3A4326&srsName=EPSG%3A4326';
-    let urlJsonCiudades = 'http://plataformaurbanapro-q.cepal.org/es/ext/mapdata/circularcities.json'
+    let urlJsonCiudades = `http://plataformaurbanapro-q.cepal.org/${lang}/ext/mapdata/circularcities.json`
     let membersId = []
     let year = ''
 
@@ -284,23 +284,49 @@ map.on('load', function () {
                                 ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
 
                                         boxBody.innerHTML = `      
-                                <p class="title">Población:
-                                ${e.features[0].properties.population}</p>Millones de habitantes <i>(última actualización: año ${year})</i></br ></br >
+                                <p class="title">
+                                <span class="es">Población: ${e.features[0].properties.population}</span>
+                                <span class="en">Population: ${e.features[0].properties.population}</span>
+                                </p>
+                                
+                                <span class="es">Millones de habitantes <i>(última actualización: año ${year})</i></br ></br ></span>
+                                <span class="en">Millions of inhabitants <i>(last update: year ${year})</i></br ></br ></span>
                               
-                                <p class="title">Fecha de adhesión a la declaración:</p>
+                                <p class="title">
+                                <span class="es">Fecha de adhesión a la declaración:</span>
+                                <span class="en">Date of adherence to the declaration:</span>
+                                </p>
                                 ${city_data.adherence_date}
                                 </br ></br >
                                 
-                                <p class="title">Hoja de ruta / Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></p>
+                                <p class="title">
+                                <span class="es>Hoja de ruta/Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                <span class="en">Roadmap/Circular Economy Strategy: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                               
+                                
+                                </p>
                                 ${city_data.roadmap_state}
                                 </br ></br >
                       
-                                <p id="question1" class="title">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></p><ul id="target_sectors"></ul>
+                                <p class="title">
+                                <span class="es">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                <span class="en">Target sectors: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                               
+                                
+                                </p><ul id="target_sectors"></ul>
                                 </br >
                            
-                                <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button>`
+                                <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">
+                                
+                                <span class="es">Ver todos los datos</span>
+                                <span class="en">See all data</span>
+                              
+                                
+                                <i class="fa-solid fa-chevron-right"></a></i></button>`
 
                                         target_sectors.map((sector) => {
                                             $("#target_sectors").append
@@ -311,14 +337,13 @@ map.on('load', function () {
                                         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                                             return new bootstrap.Tooltip(tooltipTriggerEl)
                                         })
+                                        language()
                                     })
 
                                     map.on('mouseleave', 'ciudades', function () {
                                         map.getCanvas().style.cursor = '';
                                         // box.style.display = 'none';
                                     });
-
-
 
                                 });
                         })
@@ -330,7 +355,7 @@ map.on('load', function () {
         })
 
 
-console.log(lang)
-language()
+    console.log(lang)
+    language()
 }
 );
