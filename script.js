@@ -74,7 +74,7 @@ map.on('load', function () {
     <span class="en"><i class="fa-solid fa-circle-question question" class="btn btn-primary"></i> Roadmap/Circular Economy Strategy: Indicate whether the city has or is in the process of developing its circular economy roadmap or strategy.
     </span>
 
-    <span class="es"><i class="fa-solid fa-circle-question question"></i> Sectores objetivos: Indica los sectores clave de economía circular en los cuales la ciudad cuenta con iniciativas o acciones en curso.</span>
+    <span class="es"><i class="fa-solid fa-circle-question question"></i> Sectores objetivo: Indica los sectores clave de economía circular en los cuales la ciudad cuenta con iniciativas o acciones en curso.</span>
     <span class="en"><i class="fa-solid fa-circle-question question"></i> Target sectors: Indicate the key circular economy sectors in which the city has ongoing initiatives or actions.</span>
    
     </li>
@@ -93,7 +93,10 @@ map.on('load', function () {
     let geonodeName = "geonode:cities_depualc"
     let geodata = ''
     let urlGeonode = 'https://geoportal.cepal.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=' + geonodeName + '&outputFormat=json&srs=EPSG%3A4326&srsName=EPSG%3A4326';
-    let urlJsonCiudades = `http://plataformaurbanapro-q.cepal.org/${lang}/ext/mapdata/circularcities.json`
+    // `http://plataformaurbanapro-q.cepal.org/${lang}/ext/mapdata/circularcities.json`
+    let urlJsonCiudades = `https://plataformaurbana.cepal.org/${lang}/ext/mapdata/circularcities.json`
+
+
     let membersId = []
     let year = ''
     let hoveredStateId = null;
@@ -287,8 +290,8 @@ map.on('load', function () {
                                                 1,
                                                 0
                                             ],  */
-                                            'icon-halo-color': '#000000', 
-                                           // 'icon-halo-blur': 10
+                                            'icon-halo-color': '#000000',
+                                            // 'icon-halo-blur': 10
                                         }
                                     });
 
@@ -361,11 +364,13 @@ map.on('load', function () {
                                 <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></span>
                                 <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></span></button>
                               `
-
-                                        target_sectors.map((sector) => {
+                                        const set = new Set(target_sectors);
+                                        console.log(set)
+                                        $.each(set, function (sector) {
                                             $("#target_sectors").append
                                                 (`<li>${sector.replace("'", "").replace("'", "")}</li>`)
                                         })
+
                                         //tooltip
                                         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
                                         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
