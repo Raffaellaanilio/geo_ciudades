@@ -50,6 +50,8 @@ var map = new maplibregl.Map({
     bounds: new maplibregl.LngLatBounds(region_box),
 });
 
+// disable map zoom when using scroll
+map.scrollZoom.disable();
 
 map.on('load', function () {
 
