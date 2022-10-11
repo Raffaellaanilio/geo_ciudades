@@ -66,7 +66,17 @@ map.on('load', function () {
     </li>
     <li>
     <span class="es"><i class="fa-sharp fa-solid fa-location-dot location"></i> Corresponden a las ciudades que se han adherido.</br ></span>
-    <span class="en"><i class="fa-sharp fa-solid fa-location-dot location"></i> Correspond to the cities that have adhered</span>
+    <span class="en"><i class="fa-sharp fa-solid fa-location-dot location"></i> Correspond to the cities that have adhered.</span>
+    </li>
+    <li>
+    
+    <span class="es">Hoja de ruta/Estrategia de Economía Circular: Indica si la ciudad cuenta o está en proceso de desarrollo de su hoja de ruta o estrategia de economía circular.<i class="fa-solid fa-circle-question question" class="btn btn-primary"></i></span>
+    <span class="en"><i class="fa-solid fa-circle-question question" class="btn btn-primary"></i> Roadmap/Circular Economy Strategy: Indicate whether the city has or is in the process of developing its circular economy roadmap or strategy.
+    </span>
+
+    <span class="es"><i class="fa-solid fa-circle-question question"></i> Sectores objetivos: Indica los sectores clave de economía circular en los cuales la ciudad cuenta con iniciativas o acciones en curso.</span>
+    <span class="en"><i class="fa-solid fa-circle-question question"></i> Target sectors: Indicate the key circular economy sectors in which the city has ongoing initiatives or actions.</span>
+   
     </li>
     </ul>
     `
@@ -329,11 +339,9 @@ map.on('load', function () {
                                 </br ></br >
                                 
                                 <p class="title">
-                                <span class="es">Hoja de ruta/Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                <span class="es">Hoja de ruta/Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary"></i></span>
                                 
-                                <span class="en">Roadmap/Circular Economy Strategy: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                <span class="en">Roadmap/Circular Economy Strategy: <i class="fa-solid fa-circle-question question" class="btn btn-primary"></i></span>
                                 </p>
                                 ${city_data.roadmap_state}
                                 </br ></br >
