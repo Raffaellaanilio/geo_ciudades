@@ -86,6 +86,7 @@ map.on('load', function () {
     let urlJsonCiudades = `http://plataformaurbanapro-q.cepal.org/${lang}/ext/mapdata/circularcities.json`
     let membersId = []
     let year = ''
+    let hoveredStateId = null;
 
     fetch(urlGeonode)
         .then((resp) => resp.json())
@@ -247,6 +248,7 @@ map.on('load', function () {
                                     // Add a data source containing one point feature.
                                     map.addSource("ciudades", {
                                         'type': 'geojson',
+                                        'generateId': true,
                                         'data': geodata
                                     });
 
@@ -263,12 +265,39 @@ map.on('load', function () {
                                         },
                                         'filter': ['!=', ["get", "data"], ''],
                                         'paint': {
-                                            'icon-color': '#FFFFFF',
+                                            'icon-color': [
+                                                'case',
+                                                ['boolean', ['feature-state', 'hover'], false],
+                                                '#000000',
+                                                '#FFFFFF'
+                                            ],
+                                            'icon-halo-width': 2,/* [
+                                                'case',
+                                                ['boolean', ['feature-state', 'hover'], false],
+                                                1,
+                                                0
+                                            ],  */
+                                            'icon-halo-color': '#000000', 
+                                           // 'icon-halo-blur': 10
                                         }
                                     });
 
                                     //DIV on hover
                                     map.on('mouseenter', 'ciudades', function (e) {
+
+                                        if (e.features.length > 0) {
+                                            if (hoveredStateId !== null) {
+                                                map.setFeatureState(
+                                                    { source: 'ciudades', id: hoveredStateId },
+                                                    { hover: false }
+                                                );
+                                            }
+                                            hoveredStateId = e.features[0].id;
+                                            map.setFeatureState(
+                                                { source: 'ciudades', id: hoveredStateId },
+                                                { hover: true }
+                                            );
+                                        }
 
                                         const box = document.getElementById('box');
                                         const boxHeader = document.getElementById('boxHeader');
@@ -300,12 +329,11 @@ map.on('load', function () {
                                 </br ></br >
                                 
                                 <p class="title">
-                                <span class="es>Hoja de ruta/Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                <span class="es">Hoja de ruta/Estrategia de Economía Circular: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                
                                 <span class="en">Roadmap/Circular Economy Strategy: <i class="fa-solid fa-circle-question question" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left" title="
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
-                               
-                                
                                 </p>
                                 ${city_data.roadmap_state}
                                 </br ></br >
@@ -320,10 +348,10 @@ map.on('load', function () {
                                 </p><ul id="target_sectors"></ul>
                                 </br >
                            
-                                <button type="button" class="btn btn-primary container title"><a class="enlace" target="_blank" href="${city_data.link}">
+                                <button type="button" class="btn btn-primary container title"><a class="enlace" href="${city_data.link}">
                                 
-                                <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></button></span>
-                                <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></button></span>
+                                <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></span>
+                                <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></span></button>
                               `
 
                                         target_sectors.map((sector) => {
@@ -339,6 +367,15 @@ map.on('load', function () {
                                     })
 
                                     map.on('mouseleave', 'ciudades', function () {
+
+                                        if (hoveredStateId !== null) {
+                                            map.setFeatureState(
+                                                { source: 'ciudades', id: hoveredStateId },
+                                                { hover: false }
+                                            );
+                                        }
+                                        hoveredStateId = null;
+
                                         map.getCanvas().style.cursor = '';
                                         // box.style.display = 'none';
                                     });
@@ -351,9 +388,6 @@ map.on('load', function () {
 
 
         })
-
-
-    console.log(lang)
     language()
 }
 );
