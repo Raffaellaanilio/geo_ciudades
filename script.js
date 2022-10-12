@@ -288,14 +288,6 @@ map.on('load', function () {
                                                 '#000000',
                                                 '#FFFFFF'
                                             ],
-                                            'icon-halo-width': 2,/* [
-                                                'case',
-                                                ['boolean', ['feature-state', 'hover'], false],
-                                                1,
-                                                0
-                                            ],  */
-                                            'icon-halo-color': '#000000',
-                                            // 'icon-halo-blur': 10
                                         }
                                     });
 
@@ -356,14 +348,13 @@ map.on('load', function () {
                                 </br ></br >
                       
                                 <p class="title">
-                                <span class="es">Sectores objetivo: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                <span class="es">Sectores objetivo: <i class="fa-solid fa-circle-question question"></i></span>
                                 <span class="en">Target sectors: <i class="fa-solid fa-circle-question question"></i></span>
                                             
                                 </p><ul id="target_sectors"></ul>
                                 </br >
                            
-                                <button type="button" class="btn btn-primary container title"><a class="enlace" href="${city_data.link}">
+                                <button type="button" class="btn btn-primary container title"><a class="enlace" href="${city_data.link}" target="_blank">
                                 <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></span>
                                 <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></span>
                                 </button>
