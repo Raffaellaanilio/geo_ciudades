@@ -5,6 +5,10 @@ body {
     text-decoration: none;
 }
 
+mapboxgl-ctrl-logo {
+    display: none;
+}
+
 .card-header{
     font-family: 'Fira Sans', sans-serif;
     font-style: normal;

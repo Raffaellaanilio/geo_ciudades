@@ -323,14 +323,16 @@ map.on('load', function () {
 
                                         const city_data = JSON.parse(e.features[0].properties.data)
                                         console.log(city_data.target_sectors)
-                                        const target_sectors = city_data.target_sectors.replace(/',/g, "';").split(';')
+                                        const target_sectors = city_data.target_sectors.replace(/',/g, "';").split('; ')
+                                        //const target_sectors = city_data.target_sectors.split(', ')
+                                        console.log(target_sectors)
                                         boxHeader.innerHTML = `<img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">                              
                                 ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
 
                                         boxBody.innerHTML = `      
                                 <p class="title">
-                                <span class="es">Población: ${e.features[0].properties.population}</span>
-                                <span class="en">Population: ${e.features[0].properties.population}</span>
+                                <span class="es">Población: ${new Intl.NumberFormat('de-DE').format(e.features[0].properties.population)}</span>
+                                <span class="en">Population: ${new Intl.NumberFormat('de-DE').format(e.features[0].properties.population)}</span>
                                 </p>
                                 
                                 <span class="es">Millones de habitantes <i>(última actualización: año ${year})</i></br ></br ></span>
@@ -352,7 +354,7 @@ map.on('load', function () {
                                 </br ></br >
                       
                                 <p class="title">
-                                <span class="es">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
+                                <span class="es">Sectores objetivo: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
                                 <span class="en">Target sectors: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
@@ -368,16 +370,17 @@ map.on('load', function () {
                               `
                                         const set = new Set(target_sectors);
                                         console.log(set)
-                                        $.each(set, function (sector) {
+                                        $.each(target_sectors, function (i,sector) {
+                                            console.log(sector)
                                             $("#target_sectors").append
                                                 (`<li>${sector.replace("'", "").replace("'", "")}</li>`)
                                         })
 
                                         //tooltip
-                                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                                        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                                            return new bootstrap.Tooltip(tooltipTriggerEl)
-                                        })
+                                        //var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                                        // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                        //     return new bootstrap.Tooltip(tooltipTriggerEl)
+                                        // })
                                         language()
                                     })
 
