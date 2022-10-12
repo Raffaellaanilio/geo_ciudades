@@ -103,3 +103,7 @@ ul {
     color: white;
     font-size: medium;
 }
+
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}

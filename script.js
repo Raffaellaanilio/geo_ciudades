@@ -65,7 +65,7 @@ map.on('load', function () {
     boxInfo.innerHTML = `
     <ul>
     <li>
-    <span class="es"><i class="fa-solid fa-square leyenda"></i> Las zonas pintadas en el mapa corresponden a los países que se hayan adherido.</br ></span>
+    <span class="es"><i class="fa-solid fa-square leyenda"></i> Las zonas pintadas en el mapa corresponden a ciudades (de países) que se hayan adherido.</br ></span>
     <span class="en"><i class="fa-solid fa-square leyenda"></i> The areas painted on the map correspond to the countries that have joined.</span>
     </li>
     <li>
