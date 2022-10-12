@@ -50,6 +50,9 @@ var map = new maplibregl.Map({
     bounds: new maplibregl.LngLatBounds(region_box),
 });
 
+// Add zoom and rotation controls to the map.
+map.addControl(new maplibregl.NavigationControl());
+
 // disable map zoom when using scroll
 map.scrollZoom.disable();
 

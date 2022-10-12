@@ -6,7 +6,7 @@ var main_items = {
     "map": {
         "center": [-100, -9], // X and Y
         "zoom": 4,
-        "style": "mapbox://styles/mapbox/light-v10", //https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}@2x.png
+        "style": "mapbox://styles/mapbox/streets-v11", //https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}@2x.png
         "region_box": [[-27, -57], [-58, 34]],
     }
 }
