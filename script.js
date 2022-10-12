@@ -51,7 +51,8 @@ var map = new maplibregl.Map({
 });
 
 // Add zoom and rotation controls to the map.
-map.addControl(new maplibregl.NavigationControl());
+map.addControl(new maplibregl.NavigationControl(), 'top-left');
+
 
 // disable map zoom when using scroll
 map.scrollZoom.disable();
@@ -96,7 +97,7 @@ map.on('load', function () {
     let geodata = ''
     let urlGeonode = 'https://geoportal.cepal.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=' + geonodeName + '&outputFormat=json&srs=EPSG%3A4326&srsName=EPSG%3A4326';
     // `http://plataformaurbanapro-q.cepal.org/${lang}/ext/mapdata/circularcities.json`
-    let urlJsonCiudades = `https://plataformaurbana.cepal.org/${lang}/ext/mapdata/circularcities.json`
+    let urlJsonCiudades = `http://plataformaurbanapro-q.cepal.org/${lang}/ext/mapdata/circularcities.json`//`https://plataformaurbana.cepal.org/${lang}/ext/mapdata/circularcities.json`
 
 
     let membersId = []
@@ -286,14 +287,14 @@ map.on('load', function () {
                                                 '#000000',
                                                 '#FFFFFF'
                                             ],
-                                            'icon-halo-width': 2,/* [
+                                          /*   'icon-halo-width': 2,/* [
                                                 'case',
                                                 ['boolean', ['feature-state', 'hover'], false],
                                                 1,
                                                 0
                                             ],  */
                                             'icon-halo-color': '#000000',
-                                            // 'icon-halo-blur': 10
+                                            // 'icon-halo-blur': 10 */
                                         }
                                     });
 

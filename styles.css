@@ -35,10 +35,12 @@ body {
     position:absolute;
     border-width: thick !important;
     width: 20rem;
-    max-width: 50%;
+    max-width: 80%;
+    max-height: 70%;
+    overflow: auto;
     padding: 0px;
     margin: 1%;
-    bottom: 7rem;
+    bottom: 6rem;
     right: 0;
     float: right;
     box-shadow: 1%;
@@ -54,6 +56,8 @@ body {
     bottom:0;
     padding: 1%;
     width: 100%;
+    max-height: 6rem;
+    overflow: auto;
     text-align: left;
     z-index: 1;
 }
@@ -77,6 +81,12 @@ p {
 
   .border-primary:nth-child(2) {
     border-color: #FF6657 !important;
+  }
+
+  .btn-primary:nth-child(2):hover {
+    border-color: white !important;
+    background-color: white;
+    color: #FF6657;
   }
 
 .btn-primary:active{
@@ -107,3 +117,4 @@ ul {
 .mapboxgl-ctrl-logo {
     display: none !important;
 }
+
