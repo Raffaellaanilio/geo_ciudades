@@ -48,7 +48,12 @@ var map = new maplibregl.Map({
     container: 'map', // container id
     style: map_style, // stylesheet location
     bounds: new maplibregl.LngLatBounds(region_box),
+    logoPosition: 'top-left',
+    maplibreLogo: false,
 });
+
+// Add zoom and rotation controls to the map.
+map.addControl(new maplibregl.NavigationControl());
 
 // disable map zoom when using scroll
 map.scrollZoom.disable();
@@ -59,12 +64,11 @@ map.on('load', function () {
     const boxHeader = document.getElementById('boxHeader');
     const boxBody = document.getElementById('boxBody');
 
-
     boxInfo.innerHTML = `
     <ul>
     <li>
-    <span class="es"><i class="fa-solid fa-square leyenda"></i> Las zonas pintadas en el mapa corresponden a los países que se hayan adherido.</br ></span>
-    <span class="en"><i class="fa-solid fa-square leyenda"></i> The areas painted on the map correspond to the countries that have joined.</span>
+    <span class="es"><i class="fa-solid fa-square leyenda"></i> Las zonas pintadas en el mapa corresponden a los países con ciudades adheridas.</br ></span>
+    <span class="en"><i class="fa-solid fa-square leyenda"></i> The areas painted on the map correspond to the countries with joined cities.</span>
     </li>
     <li>
     <span class="es"><i class="fa-sharp fa-solid fa-location-dot location"></i> Corresponden a las ciudades que se han adherido.</br ></span>
@@ -72,7 +76,7 @@ map.on('load', function () {
     </li>
     <li>
     
-    <span class="es">Hoja de ruta/Estrategia de Economía Circular: Indica si la ciudad cuenta o está en proceso de desarrollo de su hoja de ruta o estrategia de economía circular.<i class="fa-solid fa-circle-question question" class="btn btn-primary"></i></span>
+    <span class="es"><i class="fa-solid fa-circle-question question" class="btn btn-primary"></i> Hoja de ruta/Estrategia de Economía Circular: Indica si la ciudad cuenta o está en proceso de desarrollo de su hoja de ruta o estrategia de economía circular.</span>
     <span class="en"><i class="fa-solid fa-circle-question question" class="btn btn-primary"></i> Roadmap/Circular Economy Strategy: Indicate whether the city has or is in the process of developing its circular economy roadmap or strategy.
     </span>
 
@@ -85,8 +89,6 @@ map.on('load', function () {
 
     boxHeader.innerHTML = `<span class="es">Mapa Ciudades</span><span class="en">City map</span>`
     boxBody.innerHTML = `<span class="es">Por favor, seleccione una ciudad para ver su informacion</span><span class="en">Please select a city to see its information</span>`
-
-
 
     $.each(countries.features, function (i, country) {
         country.properties.in = 0
@@ -356,17 +358,15 @@ map.on('load', function () {
                                 <p class="title">
                                 <span class="es">Sectores objetivo: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
-                                <span class="en">Target sectors: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
-                               
-                                
+                                <span class="en">Target sectors: <i class="fa-solid fa-circle-question question"></i></span>
+                                            
                                 </p><ul id="target_sectors"></ul>
                                 </br >
                            
                                 <button type="button" class="btn btn-primary container title"><a class="enlace" href="${city_data.link}">
-                                
                                 <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></span>
-                                <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></span></button>
+                                <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></span>
+                                </button>
                               `
                                         const set = new Set(target_sectors);
                                         console.log(set)
@@ -401,10 +401,6 @@ map.on('load', function () {
                                 });
                         })
                 })
-
-
-
-
         })
     language()
 }

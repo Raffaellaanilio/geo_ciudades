@@ -27,7 +27,7 @@ mapboxgl-ctrl-logo {
 #map {
     position: absolute;
     top: 0vh;
-    bottom: 0vh;
+    bottom: 6rem;
     left:0vh;
     right:0vh;
 }
