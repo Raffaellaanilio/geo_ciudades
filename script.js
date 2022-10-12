@@ -48,6 +48,8 @@ var map = new maplibregl.Map({
     container: 'map', // container id
     style: map_style, // stylesheet location
     bounds: new maplibregl.LngLatBounds(region_box),
+    logoPosition: 'top-left',
+    maplibreLogo: false,
 });
 
 // Add zoom and rotation controls to the map.
@@ -66,8 +68,8 @@ map.on('load', function () {
     boxInfo.innerHTML = `
     <ul>
     <li>
-    <span class="es"><i class="fa-solid fa-square leyenda"></i> Las zonas pintadas en el mapa corresponden a ciudades (de países) que se hayan adherido.</br ></span>
-    <span class="en"><i class="fa-solid fa-square leyenda"></i> The areas painted on the map correspond to the countries that have joined.</span>
+    <span class="es"><i class="fa-solid fa-square leyenda"></i> Las zonas pintadas en el mapa corresponden a los países con ciudades adheridas.</br ></span>
+    <span class="en"><i class="fa-solid fa-square leyenda"></i> The areas painted on the map correspond to the countries with joined cities.</span>
     </li>
     <li>
     <span class="es"><i class="fa-sharp fa-solid fa-location-dot location"></i> Corresponden a las ciudades que se han adherido.</br ></span>
@@ -287,14 +289,6 @@ map.on('load', function () {
                                                 '#000000',
                                                 '#FFFFFF'
                                             ],
-                                          /*   'icon-halo-width': 2,/* [
-                                                'case',
-                                                ['boolean', ['feature-state', 'hover'], false],
-                                                1,
-                                                0
-                                            ],  */
-                                            'icon-halo-color': '#000000',
-                                            // 'icon-halo-blur': 10 */
                                         }
                                     });
 
@@ -324,23 +318,16 @@ map.on('load', function () {
 
                                         const city_data = JSON.parse(e.features[0].properties.data)
                                         console.log(city_data.target_sectors)
-                                        const target_sectors = city_data.target_sectors.replace(/',/g, "';").split(';')
+                                        const target_sectors = city_data.target_sectors.replace(/',/g, "';").split('; ')
+                                        //const target_sectors = city_data.target_sectors.split(', ')
                                         console.log(target_sectors)
-
-                                        /*  const quitarSectoresDuplicados = target_sectors.reduce((acc,item)=> {
-                                            if(!acc.includes(item)){
-                                                acc.push(item);
-                                            }
-                                            return acc;
-                                        },[]) */
-
                                         boxHeader.innerHTML = `<img src="./images/flags_square/${e.features[0].properties.country_code}.svg" style="height:2rem;border-radius:50%;">                              
                                 ${e.features[0].properties.country_name}, ${e.features[0].properties.name_es}`
 
                                         boxBody.innerHTML = `      
                                 <p class="title">
-                                <span class="es">Población: ${e.features[0].properties.population}</span>
-                                <span class="en">Population: ${e.features[0].properties.population}</span>
+                                <span class="es">Población: ${new Intl.NumberFormat('de-DE').format(e.features[0].properties.population)}</span>
+                                <span class="en">Population: ${new Intl.NumberFormat('de-DE').format(e.features[0].properties.population)}</span>
                                 </p>
                                 
                                 <span class="es">Millones de habitantes <i>(última actualización: año ${year})</i></br ></br ></span>
@@ -362,30 +349,30 @@ map.on('load', function () {
                                 </br ></br >
                       
                                 <p class="title">
-                                <span class="es">Sectores objetivos: <i class="fa-solid fa-circle-question question" data-bs-toggle="tooltip" data-bs-placement="left" title="
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut vestibulum magna. Etiam ex arcu, mollis sit amet congue sit amet, ornare vel lacus. Mauris luctus finibus velit, sed fermentum arcu efficitur non. Praesent arcu leo, eleifend at tellus et, posuere tempus est. Donec a feugiat urna. Vivamus in lectus at erat ultrices commodo id eu massa. Etiam bibendum non orci id laoreet."></i></span>
+                                <span class="es">Sectores objetivo: <i class="fa-solid fa-circle-question question"></i></span>
                                 <span class="en">Target sectors: <i class="fa-solid fa-circle-question question"></i></span>
                                             
                                 </p><ul id="target_sectors"></ul>
                                 </br >
                            
-                                <button type="button" class="btn btn-primary container title"><a class="enlace" href="${city_data.link}">
+                                <button type="button" class="btn btn-primary container title"><a class="enlace" href="${city_data.link}" target="_blank">
                                 <span class="es">Ver todos los datos <i class="fa-solid fa-chevron-right"></a></i></span>
                                 <span class="en">See all data <i class="fa-solid fa-chevron-right"></a></i></span>
                                 </button>
                               `
                                         const set = new Set(target_sectors);
                                         console.log(set)
-                                        $.each(set, function (sector) {
+                                        $.each(target_sectors, function (i,sector) {
+                                            console.log(sector)
                                             $("#target_sectors").append
                                                 (`<li>${sector.replace("'", "").replace("'", "")}</li>`)
                                         })
 
                                         //tooltip
-                                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                                        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                                            return new bootstrap.Tooltip(tooltipTriggerEl)
-                                        })
+                                        //var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                                        // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                        //     return new bootstrap.Tooltip(tooltipTriggerEl)
+                                        // })
                                         language()
                                     })
 
